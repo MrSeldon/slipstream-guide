@@ -706,7 +706,7 @@ body {
   <!-- CTI -->
   <div class="sidebar-domain">
     <div class="sidebar-domain-label">Methodology</div>
-    <a href="#what-youre-building" class="sidebar-family-link">CTI&trade; Introduction</a>
+    <a href="#how-slipstream-thinks" class="sidebar-family-link">CTI&trade; Introduction</a>
     <a href="./cti-methodology" class="sidebar-family-link">Full Methodology <span class="translation">&rarr;</span></a>
   </div>
 
@@ -819,17 +819,23 @@ body {
     </div>
   </div>
 
-  <!-- What You're Actually Building (CTI™ Intro) -->
-  <div class="guide-section" id="what-youre-building">
-    <h2>What You&rsquo;re Actually Building</h2>
+  <!-- How Slipstream Thinks (CTI™ Intro) -->
+  <div class="guide-section" id="how-slipstream-thinks">
+    <h2>How Slipstream Thinks</h2>
     <p>
-      When you build a rill, you&rsquo;re performing something we call <strong>Computational Tomographic Intelligence&trade;</strong>&nbsp;&mdash; CTI&trade;. The name borrows from medical imaging: a CT scan doesn&rsquo;t compress a single X-ray. It takes projections from multiple angles and synthesizes them into a picture that no individual slice contains. The output&nbsp;&mdash; the tomogram&nbsp;&mdash; is something new.
+      Slipstream is built on a methodology we call <strong>Computational Tomographic Intelligence&trade;</strong>&nbsp;&mdash; CTI&trade;. The name borrows from medical imaging: a CT scan doesn&rsquo;t compress a single X-ray. It takes projections from multiple angles and synthesizes them into a picture that no individual slice contains. The output&nbsp;&mdash; the tomogram&nbsp;&mdash; is something new.
     </p>
     <p>
-      That&rsquo;s what a rill is. You&rsquo;re taking heterogeneous data sources&nbsp;&mdash; APIs, databases, reference material, computed values&nbsp;&mdash; and using AI to synthesize them into a structured intelligence unit. Not a summary. Not a lookup table. A <em>computational tomogram</em>: a distilled, queryable piece of knowledge that captures cross-source relationships the raw data never explicitly states.
+      Slipstream works the same way, in two layers:
     </p>
     <p>
-      The key idea is <strong>front-loading the cognitive work</strong>. Building a rill is computationally intensive&nbsp;&mdash; you&rsquo;re asking AI to reason across multiple sources, identify cross-domain patterns, weigh inferences, and compile all of that into a structured unit. That&rsquo;s real cognitive compute, and it happens upfront. But once it&rsquo;s done, <em>it&rsquo;s done</em>. The thinking has been performed, packaged, and stored. Every subsequent query against that tomogram costs nearly nothing compared to re-deriving the answer from scratch.
+      A <strong>rill</strong> is a computational tomogram&nbsp;&mdash; a structured intelligence unit built by synthesizing heterogeneous data sources (APIs, databases, reference material, computed values) through AI. Not a summary. Not a lookup table. A distilled, queryable piece of knowledge that captures cross-source relationships the raw data never explicitly states. Rills are broad and first-principles by design: one rill covers an entire domain like electrical engineering, pharmacology, or atmospheric science.
+    </p>
+    <p>
+      A <strong>flow</strong> is a composition of rills wired together to solve a specific problem. Need to design a speaker crossover for a particular room? That&rsquo;s not one rill&nbsp;&mdash; it&rsquo;s a flow that composes an electrical engineering rill with an acoustics rill with a spatial analysis rill. The rills stay general. The specificity comes from how you compose them. This is how Slipstream users work day-to-day: assembling flows from a library of pre-built intelligence.
+    </p>
+    <p>
+      The key idea behind both is <strong>front-loading the cognitive work</strong>. Building a rill is computationally intensive&nbsp;&mdash; AI reasons across multiple sources, identifies cross-domain patterns, weighs inferences, and compiles all of that into a structured unit. That&rsquo;s real cognitive compute, and it happens upfront. But once it&rsquo;s done, <em>it&rsquo;s done</em>. The thinking has been performed, packaged, and stored. Every subsequent query&nbsp;&mdash; every flow that composes that rill&nbsp;&mdash; costs nearly nothing compared to re-deriving the answer from scratch.
     </p>
     <p>
       This process&nbsp;&mdash; the front-loaded synthesis&nbsp;&mdash; is what we call <strong>cognitive compression</strong>. It&rsquo;s different from simply making information shorter (that&rsquo;s semantic compression&nbsp;&mdash; saying the same thing with fewer words). Cognitive compression packages <em>reasoning</em>&nbsp;&mdash; the inferential work of connecting patterns across sources&nbsp;&mdash; so it doesn&rsquo;t have to be re-derived every time someone asks the question. The thinking itself gets compiled.
@@ -838,7 +844,7 @@ body {
       The practical consequence is striking: the entire Slipstream intelligence library&nbsp;&mdash; hundreds of rills across dozens of families&nbsp;&mdash; compresses to a fraction of a single AI context window. What originally seemed like it would require feeding enormous datasets into every conversation turns out to be radically efficient, because all that cognitive labor was front-loaded into the build process. The rills carry the conclusions, the relationships, the weighted inferences. The context window receives refined intelligence, not raw material.
     </p>
     <p style="margin-top: 20px;">
-      You don&rsquo;t need to understand any of this to build rills. The guide below is purely practical. But if you&rsquo;re curious about the methodology&nbsp;&mdash; how tomogram weighting works, what cognitive compression density actually measures, and why this architecture scales the way it does&nbsp;&mdash; there&rsquo;s a <a href="./cti-methodology" style="color: var(--forest); text-decoration: underline; text-underline-offset: 3px;">deeper technical overview here&nbsp;&rarr;</a>
+      <strong>This guide covers the rill-building side</strong>&nbsp;&mdash; how to take a domain, spec a family of rills, and bring them to life. If you&rsquo;re curious about the deeper methodology&nbsp;&mdash; how tomogram weighting works, what cognitive compression density actually measures, and why this architecture scales the way it does&nbsp;&mdash; there&rsquo;s a <a href="./cti-methodology" style="color: var(--forest); text-decoration: underline; text-underline-offset: 3px;">technical overview here&nbsp;&rarr;</a>
     </p>
   </div>
 
