@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTI&trade; Methodology &mdash; Slipstream</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --paper: #faf9f6;
+  --paper-warm: #f5f3ee;
+  --ink: #1a1a1a;
+  --ink-light: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --ink-faint: #c5c3be;
+  --forest: #2d5a3d;
+  --forest-light: #3d7a53;
+  --forest-faint: rgba(45, 90, 61, 0.08);
+  --content-max: 860px;
+  --content-pad: 48px;
+  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+  --font-sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.content {
+  max-width: calc(var(--content-max) + var(--content-pad) * 2);
+  margin: 0 auto;
+  padding: var(--content-pad);
+}
+
+/* --- Back Link --- */
+.back-link {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  margin-bottom: 48px;
+  transition: color 0.15s;
+}
+
+.back-link:hover { color: var(--forest); }
+
+/* --- Cover --- */
+.cover {
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--ink-faint);
+  margin-bottom: 56px;
+}
+
+.cover h1 {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.cover .epigraph {
+  max-width: 640px;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--ink-light);
+  line-height: 1.6;
+}
+
+/* --- Sections --- */
+.section {
+  margin-bottom: 56px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--ink-faint);
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section h2 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.section h3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 12px;
+  margin-top: 32px;
+}
+
+.section p {
+  max-width: 640px;
+  color: var(--ink-light);
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.section p em {
+  color: var(--ink);
+  font-style: italic;
+}
+
+.section p strong {
+  color: var(--ink);
+}
+
+/* --- Formula Block --- */
+.formula-block {
+  background: var(--paper-warm);
+  border: 1px solid var(--ink-faint);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  max-width: 400px;
+}
+
+.formula-block code {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.formula-block .formula-legend {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  line-height: 1.7;
+}
+
+.formula-block .formula-legend strong {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink);
+}
+
+/* --- Tables --- */
+.data-table {
+  width: 100%;
+  max-width: 740px;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 0.85rem;
+}
+
+.data-table th {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--ink-faint);
+}
+
+.data-table td {
+  padding: 10px 12px;
+  color: var(--ink-light);
+  border-bottom: 1px solid var(--ink-faint);
+  vertical-align: top;
+}
+
+.data-table td:first-child {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.data-table .tw-cell {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--forest);
+}
+
+/* --- Notation Spec Block --- */
+.notation-block {
+  background: #1a1a1a;
+  color: #e8e4dd;
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin: 28px 0;
+  max-width: 480px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.75;
+  overflow-x: auto;
+}
+
+.notation-block .notation-id {
+  color: #6dbf8b;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.notation-block .notation-rule {
+  color: #4a4a4a;
+  letter-spacing: 0.05em;
+}
+
+.notation-block .notation-row {
+  display: flex;
+  gap: 12px;
+}
+
+.notation-block .notation-key {
+  color: #8a8a8a;
+  min-width: 48px;
+}
+
+.notation-block .notation-val {
+  color: #e8e4dd;
+  font-weight: 500;
+  min-width: 96px;
+}
+
+.notation-block .notation-desc {
+  color: #6a6a6a;
+}
+
+.notation-block .notation-sources {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #2a2a2a;
+  color: #6a6a6a;
+}
+
+.notation-block .notation-sources span {
+  color: #8a8a8a;
+}
+
+/* --- Layer Table --- */
+.layer-table td strong {
+  color: var(--ink);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .content { padding: 24px 20px; }
+  .cover h1 { font-size: 2rem; }
+  .section h2 { font-size: 1.5rem; }
+  .notation-block { padding: 20px; font-size: 0.75rem; }
+  .data-table { font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="content">
+
+  <a href="../" class="back-link">&larr; Back to The Rill Catalog</a>
+
+  <!-- Cover -->
+  <div class="cover">
+    <h1>Computational Tomographic Intelligence&trade;</h1>
+    <p class="epigraph">
+      A methodology for layering heterogeneous datasets and using AI-driven cognitive compression to produce computational tomograms&nbsp;&mdash; structured intelligence units that distill gigabytes of cross-source data into kilobytes of queryable knowledge.
+    </p>
+  </div>
+
+  <!-- The Analogy -->
+  <div class="section">
+    <h2>The Analogy, Precisely</h2>
+    <p>
+      In computed tomography, a machine takes X-ray projections from multiple angles around a body. No single projection shows the internal structure. The <strong>tomogram</strong>&nbsp;&mdash; the cross-sectional image&nbsp;&mdash; emerges only when all projections are synthesized together.
+    </p>
+    <p>
+      Computational Tomographic Intelligence&trade; applies the same principle to data. Multiple heterogeneous sources (APIs, datasets, research, computed values) serve as the &ldquo;projections.&rdquo; AI-driven synthesis produces the <strong>computational tomogram</strong>&nbsp;&mdash; a structured intelligence unit that reveals cross-source patterns, relationships, and inferences that none of the individual sources contain.
+    </p>
+    <p>
+      The modifier <em>computational</em> distinguishes it from the medical usage and positions it as a parallel methodology: a medical tomogram is the output of computed tomography; a computational tomogram is the output of Computational Tomographic Intelligence&trade;.
+    </p>
+  </div>
+
+  <!-- Two Types of Compression -->
+  <div class="section">
+    <h2>Two Types of Compression</h2>
+
+    <h3>Semantic Compression</h3>
+    <p>
+      Takes information and reduces its volume while preserving the same content. A 50,000-word database entry compressed to 200 words is semantic compression. Input and output are the same type of thing&nbsp;&mdash; one is just denser.
+    </p>
+    <p><em>How do we say the same thing with less?</em></p>
+
+    <h3>Cognitive Compression</h3>
+    <p>
+      Takes reasoning across multiple sources and packages the <em>conclusions</em>&nbsp;&mdash; the inferential work, the cross-source synthesis&nbsp;&mdash; so that the thinking doesn&rsquo;t have to be re-derived. The output isn&rsquo;t a shorter version of the input. It&rsquo;s a new artifact that captures knowledge the inputs never explicitly contained.
+    </p>
+    <p><em>How do we think the same thoughts with less?</em></p>
+
+    <p style="margin-top: 24px;">
+      Every computational tomogram performs both types of compression. The value&nbsp;&mdash; what makes this worth doing&nbsp;&mdash; lives in the cognitive layer.
+    </p>
+  </div>
+
+  <!-- Tomogram Weighting -->
+  <div class="section">
+    <h2>Tomogram Weighting</h2>
+    <p>
+      Each computational tomogram carries a measurable weight&nbsp;&mdash; a composite of its compression ratio and the density of cross-source inferences it contains. This gives us a way to quantify the intelligence embedded in a rill, compare rills to each other, and track optimization over time.
+    </p>
+
+    <h3>The Formula</h3>
+    <div class="formula-block">
+      <code>TW = log&#8321;&#8320;(CR) &times; &delta;</code>
+      <div class="formula-legend">
+        <strong>TW</strong> &mdash; Tomogram Weight (typically 0&ndash;10 scale)<br>
+        <strong>CR</strong> &mdash; Compression Ratio (source data volume &divide; tomogram volume)<br>
+        <strong>&delta;</strong> &mdash; Cognitive Compression Density (cross-source inferences per KB of tomogram)
+      </div>
+    </div>
+    <p>
+      The logarithmic scale on compression ratio keeps the numbers human-readable. A compression ratio of 364,000:1 becomes ~5.6 on the log scale, rather than an unwieldy raw number.
+    </p>
+
+    <h3>Example Weights</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Tomogram</th>
+          <th>Sources</th>
+          <th>Source Size</th>
+          <th>Output</th>
+          <th>CR</th>
+          <th>&delta;</th>
+          <th>TW</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Low-weight (single source summary)</td>
+          <td>1</td>
+          <td>500 MB</td>
+          <td>15 KB</td>
+          <td>33,333:1</td>
+          <td>0.2</td>
+          <td class="tw-cell">0.9</td>
+        </tr>
+        <tr>
+          <td>Medium-weight (multi-source synthesis)</td>
+          <td>6</td>
+          <td>8 GB</td>
+          <td>22 KB</td>
+          <td>364,000:1</td>
+          <td>1.05</td>
+          <td class="tw-cell">5.8</td>
+        </tr>
+        <tr>
+          <td>High-weight (deep cross-domain)</td>
+          <td>12+</td>
+          <td>50+ GB</td>
+          <td>30 KB</td>
+          <td>1,600,000:1+</td>
+          <td>2.0+</td>
+          <td class="tw-cell">~12.4</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      A low-weight tomogram is essentially a well-structured summary&nbsp;&mdash; useful but not much cognitive compression happening. A medium-weight tomogram is where it gets interesting: the inference density shows genuine cross-source synthesis. High-weight tomograms are the rills that answer questions none of the source datasets could answer individually.
+    </p>
+
+    <h3>The Three Layers of Reduction</h3>
+    <table class="data-table layer-table">
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Transition</th>
+          <th>Typical Ratio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Layer 1</strong></td>
+          <td>Raw data &rarr; Structured data</td>
+          <td>~10:1</td>
+        </tr>
+        <tr>
+          <td><strong>Layer 2</strong></td>
+          <td>Structured data &rarr; Computational tomogram</td>
+          <td>~1,000:1</td>
+        </tr>
+        <tr>
+          <td><strong>Layer 3</strong></td>
+          <td>Tomogram &rarr; Query response</td>
+          <td>~10:1</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Combined</strong>: Source-to-answer compression ratios can reach <strong>100,000:1</strong> or higher.
+    </p>
+    <p>
+      The practical implication: the cache-to-insight ratio approaches infinity. Once a tomogram exists, every subsequent query against it costs nearly nothing compared to re-deriving the answer from raw sources. The intelligence has been refined and stored, not generated on demand.
+    </p>
+
+    <h3>Notation</h3>
+    <p>A computational tomogram&rsquo;s spec block looks like this:</p>
+
+    <div class="notation-block">
+      <div class="notation-id">CT-FLORA-0042</div>
+      <div class="notation-rule">&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;</div>
+      <div class="notation-row"><span class="notation-key">TW</span><span class="notation-val">5.8</span><span class="notation-desc">Tomogram Weight (0-10)</span></div>
+      <div class="notation-row"><span class="notation-key">CR</span><span class="notation-val">364,000:1</span><span class="notation-desc">Compression Ratio</span></div>
+      <div class="notation-row"><span class="notation-key">&delta;</span><span class="notation-val">1.05</span><span class="notation-desc">Cognitive Compression Density (inferences/KB)</span></div>
+      <div class="notation-row"><span class="notation-key">S</span><span class="notation-val">6</span><span class="notation-desc">Sources Synthesized</span></div>
+      <div class="notation-row"><span class="notation-key">V</span><span class="notation-val">22 KB</span><span class="notation-desc">Tomogram Volume</span></div>
+      <div class="notation-rule">&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;</div>
+      <div class="notation-sources">Sources: <span>GBIF &middot; USDA PLANTS &middot; PubChem &middot; CosIng &middot; OECD &middot; BLS</span></div>
+      <div class="notation-sources">Generated: <span>2026-02-18</span></div>
+    </div>
+
+    <p>
+      The <strong>CT-</strong> prefix marks it as a computational tomogram. The family name positions it within Slipstream. The numeric ID is sequential. Every metric is real, meaningful, and defensible.
+    </p>
+  </div>
+
+  <!-- Why This Scales -->
+  <div class="section">
+    <h2>Why This Scales</h2>
+    <p>
+      The economics of CTI&trade; come down to one principle: <strong>front-load the cognition, then never pay for it again.</strong> Building a tomogram is expensive&nbsp;&mdash; it requires real compute, real reasoning across sources, real synthesis. But that cost is paid once. Every query thereafter is nearly free.
+    </p>
+    <p>
+      The entire Slipstream intelligence library&nbsp;&mdash; hundreds of rills, dozens of families&nbsp;&mdash; fits comfortably within a fraction of a single AI context window. A well-structured computational tomogram with embedded relationships, weighted inferences, and queryable knowledge runs 5&ndash;50 kilobytes. Smaller than a single photograph.
+    </p>
+    <p>
+      This is the architectural inversion that makes Slipstream work. Instead of feeding massive datasets into every conversation and hoping the AI can find what matters, the cognitive labor has already been performed. The context window receives refined intelligence. The model reasons <em>with</em> the tomogram rather than reasoning <em>through</em> raw data.
+    </p>
+    <p>
+      The rill is the compiled form of domain intelligence. And like compiled code, it&rsquo;s portable&nbsp;&mdash; you don&rsquo;t need the original source to run it.
+    </p>
+  </div>
+
+  <!-- The Recompute Cycle -->
+  <div class="section">
+    <h2>The Recompute Cycle</h2>
+    <p>
+      A tomogram isn&rsquo;t frozen at the moment of creation. It&rsquo;s a snapshot of the best synthesis a given model can produce against a given set of sources at a given point in time. All three of those variables change.
+    </p>
+    <p>
+      Sources update. New datasets emerge. And&nbsp;&mdash; critically&nbsp;&mdash; the models themselves get better. Frontier models aren&rsquo;t iterating on annual cycles anymore; meaningful capability leaps are arriving every few months, sometimes weeks. A tomogram compiled with the current generation will be outperformed by one compiled with the next&nbsp;&mdash; and &ldquo;next&rdquo; keeps arriving faster. The cognitive compression gets tighter. The inferences get sharper. Cross-source patterns that were invisible at one capability level become obvious at the next.
+    </p>
+    <p>
+      This is where a Kaizen principle comes in: <strong>staged recomputes</strong>. Not constant, not on every model release, but deliberate&nbsp;&mdash; timed to meaningful capability leaps. When a new model generation lands, you recompute a representative set of tomograms against the same source data and measure what changes. Did the tomogram weight increase? Did inference density improve? Did the model surface relationships the previous version missed?
+    </p>
+    <p>
+      The delta between recomputes becomes a metric unto itself. It&rsquo;s a human-readable signal for something that&rsquo;s otherwise very difficult to measure: <em>how much better is AI actually getting at reasoning?</em> Benchmark scores and parameter counts are abstractions. But when you recompute the same tomogram from the same sources with a newer model and the weight goes from 5.8 to 7.2&nbsp;&mdash; that&rsquo;s a concrete, interpretable gain. The model found more. It reasoned deeper. And you can see exactly where.
+    </p>
+    <p>
+      Over time, this creates a version history for intelligence itself. Each recompute is a timestamp. The trajectory tells you something real about the rate of capability growth&nbsp;&mdash; not in the abstract, but measured against your own data, your own domains, your own questions.
+    </p>
+  </div>
+
+</div>
+
+</body>
+</html>
