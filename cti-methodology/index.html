@@ -199,59 +199,73 @@ body {
 
 /* --- Notation Spec Block --- */
 .notation-block {
-  background: #1a1a1a;
-  color: #e8e4dd;
+  background: var(--paper-warm);
+  border: 1px solid var(--ink-faint);
   border-radius: 8px;
-  padding: 28px 32px;
+  padding: 36px 40px;
   margin: 28px 0;
-  max-width: 480px;
+  max-width: 520px;
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  line-height: 1.75;
-  overflow-x: auto;
+  line-height: 1.5;
 }
 
 .notation-block .notation-id {
-  color: #6dbf8b;
-  font-size: 0.95rem;
-  font-weight: 500;
-  margin-bottom: 4px;
+  color: var(--forest);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
 }
 
-.notation-block .notation-rule {
-  color: #4a4a4a;
-  letter-spacing: 0.05em;
+.notation-block .notation-data {
+  border-top: 1px solid var(--ink-faint);
+  border-bottom: 1px solid var(--ink-faint);
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .notation-block .notation-row {
   display: flex;
-  gap: 12px;
+  align-items: baseline;
+  gap: 16px;
 }
 
 .notation-block .notation-key {
-  color: #8a8a8a;
-  min-width: 48px;
+  color: var(--ink-muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  min-width: 28px;
+  flex-shrink: 0;
 }
 
 .notation-block .notation-val {
-  color: #e8e4dd;
-  font-weight: 500;
-  min-width: 96px;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-width: 100px;
+  flex-shrink: 0;
 }
 
 .notation-block .notation-desc {
-  color: #6a6a6a;
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+  font-weight: 400;
 }
 
-.notation-block .notation-sources {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #2a2a2a;
-  color: #6a6a6a;
+.notation-block .notation-meta {
+  margin-top: 16px;
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  line-height: 1.7;
 }
 
-.notation-block .notation-sources span {
-  color: #8a8a8a;
+.notation-block .notation-meta span {
+  color: var(--ink-light);
 }
 
 /* --- Layer Table --- */
@@ -264,7 +278,9 @@ body {
   .content { padding: 24px 20px; }
   .cover h1 { font-size: 2rem; }
   .section h2 { font-size: 1.5rem; }
-  .notation-block { padding: 20px; font-size: 0.75rem; }
+  .notation-block { padding: 24px 20px; }
+  .notation-block .notation-val { font-size: 0.88rem; min-width: 88px; }
+  .notation-block .notation-desc { font-size: 0.68rem; }
   .data-table { font-size: 0.78rem; }
 }
 </style>
@@ -424,15 +440,15 @@ body {
 
     <div class="notation-block">
       <div class="notation-id">CT-FLORA-0042</div>
-      <div class="notation-rule">&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;</div>
-      <div class="notation-row"><span class="notation-key">TW</span><span class="notation-val">5.8</span><span class="notation-desc">Tomogram Weight (0-10)</span></div>
-      <div class="notation-row"><span class="notation-key">CR</span><span class="notation-val">364,000:1</span><span class="notation-desc">Compression Ratio</span></div>
-      <div class="notation-row"><span class="notation-key">&delta;</span><span class="notation-val">1.05</span><span class="notation-desc">Cognitive Compression Density (inferences/KB)</span></div>
-      <div class="notation-row"><span class="notation-key">S</span><span class="notation-val">6</span><span class="notation-desc">Sources Synthesized</span></div>
-      <div class="notation-row"><span class="notation-key">V</span><span class="notation-val">22 KB</span><span class="notation-desc">Tomogram Volume</span></div>
-      <div class="notation-rule">&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;</div>
-      <div class="notation-sources">Sources: <span>GBIF &middot; USDA PLANTS &middot; PubChem &middot; CosIng &middot; OECD &middot; BLS</span></div>
-      <div class="notation-sources">Generated: <span>2026-02-18</span></div>
+      <div class="notation-data">
+        <div class="notation-row"><span class="notation-key">TW</span><span class="notation-val">5.8</span><span class="notation-desc">Tomogram Weight (0&ndash;10)</span></div>
+        <div class="notation-row"><span class="notation-key">CR</span><span class="notation-val">364,000:1</span><span class="notation-desc">Compression Ratio</span></div>
+        <div class="notation-row"><span class="notation-key">&delta;</span><span class="notation-val">1.05</span><span class="notation-desc">Cognitive Compression Density (inferences/KB)</span></div>
+        <div class="notation-row"><span class="notation-key">S</span><span class="notation-val">6</span><span class="notation-desc">Sources Synthesized</span></div>
+        <div class="notation-row"><span class="notation-key">V</span><span class="notation-val">22 KB</span><span class="notation-desc">Tomogram Volume</span></div>
+      </div>
+      <div class="notation-meta">Sources: <span>GBIF &middot; USDA PLANTS &middot; PubChem &middot; CosIng &middot; OECD &middot; BLS</span></div>
+      <div class="notation-meta">Generated: <span>2026-02-18</span></div>
     </div>
 
     <p>
