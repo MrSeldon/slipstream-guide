@@ -199,8 +199,8 @@ body {
 
 /* --- Notation Spec Block --- */
 .notation-block {
-  background: var(--paper-warm);
-  border: 1px solid var(--ink-faint);
+  background: #1c1c2a;
+  border: 1px solid #2a2a3e;
   border-radius: 8px;
   padding: 36px 40px;
   margin: 28px 0;
@@ -208,20 +208,21 @@ body {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   line-height: 1.5;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
 .notation-block .notation-id {
-  color: var(--forest);
-  font-size: 1rem;
+  color: #7dba8a;
+  font-size: 1.1rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   margin-bottom: 20px;
 }
 
 .notation-block .notation-data {
-  border-top: 1px solid var(--ink-faint);
-  border-bottom: 1px solid var(--ink-faint);
-  padding: 16px 0;
+  border-top: 1px solid #2a2a3e;
+  border-bottom: 1px solid #2a2a3e;
+  padding: 18px 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -234,7 +235,7 @@ body {
 }
 
 .notation-block .notation-key {
-  color: var(--ink-muted);
+  color: #6b8f71;
   font-size: 0.7rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -244,7 +245,7 @@ body {
 }
 
 .notation-block .notation-val {
-  color: var(--ink);
+  color: #e8e4df;
   font-size: 0.95rem;
   font-weight: 600;
   min-width: 100px;
@@ -252,20 +253,20 @@ body {
 }
 
 .notation-block .notation-desc {
-  color: var(--ink-muted);
+  color: #8a8698;
   font-size: 0.72rem;
   font-weight: 400;
 }
 
 .notation-block .notation-meta {
   margin-top: 16px;
-  font-size: 0.7rem;
-  color: var(--ink-muted);
+  font-size: 0.68rem;
+  color: #5a5870;
   line-height: 1.7;
 }
 
 .notation-block .notation-meta span {
-  color: var(--ink-light);
+  color: #706e82;
 }
 
 /* --- Layer Table --- */
@@ -278,9 +279,10 @@ body {
   .content { padding: 24px 20px; }
   .cover h1 { font-size: 2rem; }
   .section h2 { font-size: 1.5rem; }
-  .notation-block { padding: 24px 20px; }
+  .notation-block { padding: 28px 24px; }
   .notation-block .notation-val { font-size: 0.88rem; min-width: 88px; }
-  .notation-block .notation-desc { font-size: 0.68rem; }
+  .notation-block .notation-desc { font-size: 0.66rem; }
+  .notation-block .notation-id { font-size: 1rem; }
   .data-table { font-size: 0.78rem; }
 }
 </style>
