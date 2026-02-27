@@ -22505,6 +22505,60 @@ body {
   .comments-toggle { right: 1rem; bottom: 1rem; }
   .page-views { right: 1rem; bottom: 4.5rem; }
 }
+
+/* ═══ TAG SEARCH ═══ */
+.tag { cursor: pointer; transition: filter 0.15s, transform 0.15s; }
+.tag:hover { filter: brightness(1.15); transform: scale(1.05); }
+
+.tag-search-overlay {
+  position: fixed; inset: 0; z-index: 110;
+  background: rgba(0,0,0,0.15); display: none;
+}
+.tag-search-overlay.active { display: flex; justify-content: center; align-items: flex-start; padding-top: 18vh; }
+
+.tag-search-popup {
+  background: var(--paper-warm); border: 1px solid var(--forest-border);
+  border-radius: 10px; box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  width: 340px; max-height: 60vh; display: flex; flex-direction: column;
+  animation: guideAnnoFadeIn 0.18s ease;
+}
+.tag-search-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 16px 10px; border-bottom: 1px solid var(--forest-border);
+}
+.tag-search-header .tag { transform: none; cursor: default; }
+.tag-search-count {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  color: var(--ink-muted); margin-left: auto;
+}
+.tag-search-close {
+  background: none; border: none; font-size: 1.3rem; cursor: pointer;
+  color: var(--ink-muted); line-height: 1; padding: 0 0 0 8px;
+}
+.tag-search-close:hover { color: var(--ink); }
+
+.tag-search-list {
+  overflow-y: auto; padding: 6px 0;
+}
+.tag-search-item {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 7px 16px; cursor: pointer; text-decoration: none; color: var(--ink);
+  transition: background 0.12s;
+}
+.tag-search-item:hover { background: var(--forest-faint); }
+.tag-search-item-badge {
+  font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600;
+  color: var(--forest); min-width: 32px;
+}
+.tag-search-item-name {
+  font-family: var(--font-serif); font-size: 0.88rem; color: var(--ink);
+}
+
+@media print { .tag-search-overlay { display: none !important; } }
+@media (max-width: 900px) {
+  .tag-search-overlay.active { padding-top: 10vh; align-items: flex-start; }
+  .tag-search-popup { width: calc(100% - 2rem); max-width: 400px; }
+}
 </style>
 
 <!-- ═══ OVERLAYS ═══ -->
@@ -22540,6 +22594,18 @@ body {
       <p>No notes yet.</p>
       <p style="margin-top: 0.5rem; font-size: 0.72rem;">Select any passage in the text to leave one.</p>
     </div>
+  </div>
+</div>
+
+<!-- ═══ TAG SEARCH OVERLAY ═══ -->
+<div class="tag-search-overlay" id="tagSearchOverlay">
+  <div class="tag-search-popup" id="tagSearchPopup">
+    <div class="tag-search-header">
+      <span id="tagSearchTag"></span>
+      <span class="tag-search-count" id="tagSearchCount"></span>
+      <button class="tag-search-close" id="tagSearchClose">&times;</button>
+    </div>
+    <div class="tag-search-list" id="tagSearchList"></div>
   </div>
 </div>
 
@@ -22741,6 +22807,92 @@ function toggleComments() { document.getElementById('commentsPanel').classList.t
 // ═══ KEYBOARD SHORTCUTS ═══
 annotationInput.addEventListener('keydown', function(e) { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) saveAnnotation(); });
 annotationName.addEventListener('keydown', function(e) { if (e.key === 'Enter') saveAnnotation(); });
+
+// ═══ TAG SEARCH ═══
+(function() {
+  var overlay = document.getElementById('tagSearchOverlay');
+  var popup = document.getElementById('tagSearchPopup');
+  var tagEl = document.getElementById('tagSearchTag');
+  var countEl = document.getElementById('tagSearchCount');
+  var listEl = document.getElementById('tagSearchList');
+  var closeBtn = document.getElementById('tagSearchClose');
+
+  // Build tag → rills index
+  var tagIndex = {};
+  var cards = document.querySelectorAll('.rill-card');
+  for (var i = 0; i < cards.length; i++) {
+    var card = cards[i];
+    var id = card.id;
+    var badgeEl = card.querySelector('.rill-badge');
+    var nameEl = card.querySelector('.rill-card-name');
+    if (!badgeEl || !nameEl) continue;
+    var badge = badgeEl.textContent.trim();
+    var name = nameEl.textContent.trim();
+    var tags = card.querySelectorAll('.tag');
+    for (var j = 0; j < tags.length; j++) {
+      var t = tags[j].textContent.trim().toLowerCase();
+      if (t.indexOf('populated through use') !== -1) continue;
+      if (!tagIndex[t]) tagIndex[t] = [];
+      tagIndex[t].push({ id: id, badge: badge, name: name });
+    }
+  }
+
+  function closeSearch() { overlay.classList.remove('active'); }
+
+  function openSearch(tagText, tagClass) {
+    var key = tagText.trim().toLowerCase();
+    var rills = tagIndex[key];
+    if (!rills || !rills.length) return;
+
+    // Header tag pill
+    tagEl.className = 'tag ' + tagClass;
+    tagEl.textContent = tagText.trim();
+    countEl.textContent = rills.length + (rills.length === 1 ? ' rill' : ' rills');
+
+    // Build list
+    listEl.innerHTML = '';
+    for (var i = 0; i < rills.length; i++) {
+      var r = rills[i];
+      var a = document.createElement('a');
+      a.className = 'tag-search-item';
+      a.href = '#' + r.id;
+      a.innerHTML = '<span class="tag-search-item-badge">' + r.badge + '</span>' +
+                    '<span class="tag-search-item-name">' + r.name + '</span>';
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeSearch();
+        var target = document.getElementById(this.getAttribute('href').slice(1));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      listEl.appendChild(a);
+    }
+
+    overlay.classList.add('active');
+  }
+
+  // Delegate click on any .tag
+  document.addEventListener('click', function(e) {
+    var el = e.target;
+    if (!el.classList.contains('tag')) return;
+    // Ignore if inside the search popup itself
+    if (popup.contains(el)) return;
+    var text = el.textContent.trim();
+    if (text.toLowerCase().indexOf('populated through use') !== -1) return;
+    if (!tagIndex[text.toLowerCase()]) return;
+    e.stopPropagation();
+    var cls = el.classList.contains('tag-system') ? 'tag-system' :
+              el.classList.contains('tag-comp') ? 'tag-comp' :
+              el.classList.contains('tag-community') ? 'tag-community' : '';
+    openSearch(text, cls);
+  });
+
+  // Close handlers
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) closeSearch(); });
+  closeBtn.addEventListener('click', closeSearch);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeSearch();
+  });
+})();
 </script>
 
 </body>
